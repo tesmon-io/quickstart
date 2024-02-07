@@ -1,0 +1,19 @@
+variables:
+  reqResBaseUrl: "https://reqres.in"
+
+actions:
+  getRequest:
+    type: HTTP::CLIENT
+    props:
+      method: GET
+      baseUrl: variables.reqResBaseUrl
+      path: /api/users/2
+      headers:
+        "Content-Type": "application/json"
+
+tests:
+  getRequestTest:
+    tasks:
+      - id: task1
+        action: actions.getRequest
+        validate: assert(context["last_output"]["statusCode"] == 200)
